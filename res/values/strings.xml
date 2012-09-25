@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, iiiui!</string>
+    <string name="app_name">iiiui</string>
+    <string name="link_signin"> 
+      <a href="http://www.google.com">注册</a>
+    </string>
+    <string name="link_password"> 
+      <a href="http://www.google.com">忘记密码？</a>
+    </string>
+        
+    <string name="rlDigest"> 
+      rlDigest
+    </string>
+    <string name="tvAddress"> 
+      tvAddress
+    </string>
+    <string name="tvAddress_content"> 
+      tvAddress_content
+    </string>
+    <string name="userinfo_pwd"> 
+     	 密码
+    </string>
+    <string name="vHDivider"> 
+      vHDivider
+    </string>
+    <string name="account_info"> 
+      	账号
+    </string>
+
+</resources>
