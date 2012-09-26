@@ -699,6 +699,8 @@ containing a value of this type.
     public static final class id {
         public static final int bottom=0x7f050008;
         public static final int button=0x7f05002f;
+        public static final int buttonleft=0x7f050030;
+        public static final int buttonright=0x7f050031;
         public static final int center=0x7f05000d;
         public static final int center_horizontal=0x7f05000c;
         public static final int center_vertical=0x7f05000b;
@@ -730,14 +732,20 @@ containing a value of this type.
         public static final int gdi_rack=0x7f050020;
         public static final int gdi_scroll=0x7f05001f;
         public static final int hdpi=0x7f050005;
-        public static final int href=0x7f050030;
-        public static final int href2=0x7f050031;
         public static final int imview=0x7f050029;
         public static final int ldpi=0x7f050003;
         public static final int left=0x7f050009;
         public static final int mdpi=0x7f050004;
         public static final int multiple=0x7f05000f;
         public static final int normal=0x7f050000;
+        public static final int reg_divider=0x7f050034;
+        public static final int reg_emailmobile=0x7f050035;
+        public static final int reg_emailmobile_content=0x7f050036;
+        public static final int reg_portrait=0x7f050039;
+        public static final int reg_pwd=0x7f050037;
+        public static final int reg_pwd_content=0x7f050038;
+        public static final int reg_username=0x7f050032;
+        public static final int reg_username_content=0x7f050033;
         public static final int right=0x7f05000a;
         public static final int rlDigest=0x7f05002a;
         public static final int single=0x7f05000e;
@@ -785,7 +793,8 @@ containing a value of this type.
         public static final int gd_thumbnail_item_view=0x7f030021;
         public static final int horizontal_separation_line_repeat=0x7f030022;
         public static final int main=0x7f030023;
-        public static final int vertical_separation_line_repeat=0x7f030024;
+        public static final int registry=0x7f030024;
+        public static final int vertical_separation_line_repeat=0x7f030025;
     }
     public static final class string {
         public static final int account_info=0x7f080025;

@@ -3,6 +3,8 @@ package iiiui.android;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -12,12 +14,14 @@ import android.widget.TextView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout.LayoutParams;
 
-public class iiiui extends Activity {
+public class Iiiui extends Activity {
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        View continue_button = this.findViewById(R.id.buttonleft);
+        continue_button.setOnClickListener((OnClickListener)this);
 //        TextView label = new TextView(this);
 //        label.setText(R.string.hello);
 //        label.setTextSize(20);
