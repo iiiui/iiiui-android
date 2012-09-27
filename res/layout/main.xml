@@ -5,14 +5,14 @@
     android:layout_height="fill_parent"
     android:background="#ffffff">
 	<ImageView 
-		android:id="@+id/imview"
+		android:id="@+id/logo"
 		android:layout_width="fill_parent" 
 		android:layout_height="120.0dip"
 		android:layout_gravity="top"
 		android:src="@drawable/transparent"
 		android:layout_margin="5dip"/>
 
-    <LinearLayout android:id="@+id/rlDigest"
+    <LinearLayout android:id="@+id/signin"
         android:background="@drawable/panel_bg" android:layout_width="fill_parent"
         android:layout_height="100.0dip" android:layout_margin="5.0dip">
         <TableLayout 
@@ -22,26 +22,26 @@
         > 
         <TableRow android:layout_width="fill_parent">
 	        <TextView android:textSize="15.0sp" android:textColor="#000000"
-	            android:id="@+id/tvAddress"
+	            android:id="@+id/account"
 	            android:layout_width="wrap_content" android:layout_height="wrap_content"
 	            android:layout_marginLeft="5.0dip" 
 	            android:text="@string/account_info" android:layout_alignParentLeft="true"
 	            android:layout_alignParentTop="true" />
 	            
 	        <EditText android:textSize="15.0sp" android:textColor="#ff373737"
-	            android:id="@+id/tvAddress_content" android:layout_width="260dip"
+	            android:id="@+id/account_content" android:layout_width="260dip"
 	            android:layout_height="wrap_content"
 	        />
         </TableRow>    
         <TableRow android:layout_width="fill_parent">    
 	        <TextView android:textSize="15.0sp" android:textColor="#000000"
-	            android:id="@+id/tvAccount_info"
+	            android:id="@+id/user_pwd"
 	            android:layout_width="wrap_content" android:layout_height="wrap_content"
-	            android:text="@string/userinfo_pwd" android:layout_margin="5.0dip"
+	            android:text="@string/user_pwd_info" android:layout_margin="5.0dip"
 	        />
 	            
 	        <EditText android:textSize="15.0sp" android:textColor="#ff373737"
-	            android:id="@+id/tvAccount_info_content" android:layout_width="260dip"
+	            android:id="@+id/user_pwd_content" android:layout_width="260dip"
 	            android:layout_height="wrap_content"
 	        />
         </TableRow>
@@ -56,11 +56,11 @@
 	    android:layout_height="wrap_content" 
 	    android:layout_width="fill_parent"
 	    android:layout_margin="5.0dip"
-	    android:layout_alignBottom="@id/tvAccount_info_content"
+	    android:layout_alignBottom="@id/user_pwd_content"
 	    android:textSize="30.0sp"
 	    android:text="分享"
 	    /> 
-	    <TextView 
+	    <Button 
 		android:id="@+id/buttonleft" 
 	    android:layout_width="wrap_content" 
 	    android:layout_height="wrap_content" 
@@ -70,7 +70,7 @@
 	    android:layout_alignParentBottom="true"
 	    />
 	    
-	    <TextView 
+	    <Button 
 		android:id="@+id/buttonright"
 	    android:layout_width="wrap_content" 
 	    android:layout_height="wrap_content" 
