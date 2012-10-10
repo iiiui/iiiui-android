@@ -7,37 +7,41 @@
 	<ImageView 
 		android:id="@+id/logo"
 		android:layout_width="fill_parent" 
-		android:layout_height="120.0dip"
+		android:layout_height="150.0dip"
 		android:layout_gravity="top"
 		android:src="@drawable/transparent"
-		android:layout_margin="5dip"/>
+		android:layout_margin="10dip"/>
 
     <LinearLayout android:id="@+id/signin"
         android:background="@drawable/panel_bg" android:layout_width="fill_parent"
-        android:layout_height="100.0dip" android:layout_margin="5.0dip">
+        android:layout_height="105.0dip" android:layout_margin="5.0dip">
         <TableLayout 
             android:layout_width="fill_parent"   
             android:layout_height="wrap_content"
-            android:layout_margin="2.0dip" 
+            android:layout_margin="1.0dip" 
         > 
         <TableRow android:layout_width="fill_parent">
 	        <TextView android:textSize="15.0sp" android:textColor="#000000"
 	            android:id="@+id/account"
 	            android:layout_width="wrap_content" android:layout_height="wrap_content"
 	            android:layout_marginLeft="5.0dip" 
+	            android:layout_marginTop="7.0dip" 
 	            android:text="@string/account_info" android:layout_alignParentLeft="true"
 	            android:layout_alignParentTop="true" />
 	            
 	        <EditText android:textSize="15.0sp" android:textColor="#ff373737"
 	            android:id="@+id/account_content" android:layout_width="260dip"
 	            android:layout_height="wrap_content"
+	            android:layout_marginTop="5.0dip"
 	        />
-        </TableRow>    
+        </TableRow>
+            
         <TableRow android:layout_width="fill_parent">    
 	        <TextView android:textSize="15.0sp" android:textColor="#000000"
 	            android:id="@+id/user_pwd"
+	            android:layout_marginLeft="5.0dip"
 	            android:layout_width="wrap_content" android:layout_height="wrap_content"
-	            android:text="@string/user_pwd_info" android:layout_margin="5.0dip"
+	            android:text="@string/user_pwd_info"
 	        />
 	            
 	        <EditText android:textSize="15.0sp" android:textColor="#ff373737"
@@ -52,22 +56,29 @@
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	 >	
+    <!--
     	<Button android:id="@+id/button" 
 	    android:layout_height="wrap_content" 
 	    android:layout_width="fill_parent"
 	    android:layout_margin="5.0dip"
 	    android:layout_alignBottom="@id/user_pwd_content"
 	    android:textSize="30.0sp"
-	    android:text="分享"
-	    /> 
+	    android:text="登录"
+	    />
+	 -->     
 	    <Button 
 		android:id="@+id/buttonleft" 
 	    android:layout_width="wrap_content" 
 	    android:layout_height="wrap_content" 
 	    android:text="注册"
+	    android:textSize="15.0sp"
 	    android:layout_gravity="left"
 	    android:layout_alignParentLeft="true"
 	    android:layout_alignParentBottom="true"
+	    android:background="#ffffff"
+	    android:textColor="#000000"
+	    android:layout_marginLeft="10.0dip"
+	    android:layout_marginBottom="10.0dip"
 	    />
 	    
 	    <Button 
@@ -75,9 +86,14 @@
 	    android:layout_width="wrap_content" 
 	    android:layout_height="wrap_content" 
 	    android:text="忘记密码？"
+	    android:textSize="15.0sp"
 	    android:layout_gravity="right"
 	    android:layout_alignParentRight="true"
 	    android:layout_alignParentBottom="true"
+	    android:background="#ffffff"
+	    android:textColor="#000000"
+	    android:layout_marginRight="10.0dip"
+	    android:layout_marginBottom="10.0dip"
 	    />
      </RelativeLayout>  
 </LinearLayout>

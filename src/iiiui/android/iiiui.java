@@ -28,18 +28,17 @@ import android.widget.LinearLayout.LayoutParams;
 
 public class iiiui extends Activity {
     /** Called when the activity is first created. */
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.main);
-        Button button = (Button)findViewById(R.id.button);
-        button.setOnClickListener(new OnClickListener(){
-            public void onClick(View v) {
-            		letCamera();
-            	}
-            }
-        );
+//        Button button = (Button)findViewById(R.id.button);
+//        button.setOnClickListener(new OnClickListener(){
+//            public void onClick(View v) {
+//            		letCamera();
+//            	}
+//            }
+//        );
         Button buttonleft = (Button)findViewById(R.id.buttonleft);
         buttonleft.setOnClickListener(new OnClickListener(){
             public void onClick(View v) {
@@ -48,14 +47,15 @@ public class iiiui extends Activity {
                 startActivityForResult(regist, 1);
             }
         });
+        
     }
     
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
-        case 1:// 拍照
+        case 1:
             if (resultCode == RESULT_OK) {
-                Toast.makeText(this, "拍摄成功", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "photo finished!", Toast.LENGTH_SHORT).show();
             }
             break;
         default:
@@ -66,15 +66,15 @@ public class iiiui extends Activity {
     protected void letCamera() {
         Intent imageCaptureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         String strImgPath = Environment.getExternalStorageDirectory()
-                .toString() + "/iiiui/";// 存放照片的文件夹
+                .toString() + "/iiiui/";
         String fileName = new SimpleDateFormat("yyyyMMddHHmmss")
-                .format(new Date()) + ".jpg";// 照片命名
+                .format(new Date()) + ".jpg";
         File out = new File(strImgPath);
         if (!out.exists()) {
             out.mkdirs();
         }
         out = new File(strImgPath, fileName);
-        strImgPath = strImgPath + fileName;// 该照片的绝对路径
+        strImgPath = strImgPath + fileName;
         Uri uri = Uri.fromFile(out);
         imageCaptureIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
         imageCaptureIntent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);

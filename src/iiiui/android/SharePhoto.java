@@ -1,32 +1,26 @@
 package iiiui.android;
 
-import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.web.client.RestTemplate;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-public class Registry extends Activity {
+
+public class SharePhoto extends Activity implements SurfaceHolder.Callback{
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		RestTemplate restTemplate = new RestTemplate();
-//		restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
-//	    String result = restTemplate.getForObject("http://127.0.0.1:3000/api/users/sign_up", String.class);
-//	    System.out.println("regist-->"+result);
-		
 		this.setContentView(R.layout.registry);
+		
 		View bl = findViewById(R.id.registry_top_btn_left);
 		bl.setClickable(true);
 		bl.setOnClickListener(new OnClickListener(){
 	        public void onClick(View v) {
 //	        	Intent myIntent = new Intent(Registry.this,iiiui.class);
 //	            startActivity(myIntent);
-	            Registry.this.finish();
+	        	SharePhoto.this.finish();
 	        }
 	    });
 		
@@ -34,19 +28,27 @@ public class Registry extends Activity {
 		br.setClickable(true);
 		br.setOnClickListener(new OnClickListener(){
 	        public void onClick(View v) {
-	        	Intent myIntent = new Intent(Registry.this,Index.class);
+	        	Intent myIntent = new Intent(SharePhoto.this,Index.class);
 	            startActivity(myIntent);
-	            Registry.this.finish();
+	            SharePhoto.this.finish();
 	        }
 	    });
+		
+    }
+
+	public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {
+		// TODO Auto-generated method stub
+		
 	}
-	
-//	public void onClick(View v) {
-//		if(R.id.buttonleft == v.getId())
-//		{
-//			Intent i = new Intent(this,Registry.class);
-//			this.startActivity(i);
-//		}
-//	}
+
+	public void surfaceCreated(SurfaceHolder arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void surfaceDestroyed(SurfaceHolder arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
