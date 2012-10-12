@@ -33,6 +33,7 @@
 	            android:id="@+id/account_content" android:layout_width="260dip"
 	            android:layout_height="wrap_content"
 	            android:layout_marginTop="5.0dip"
+	            android:layout_marginLeft="5.0dip"
 	        />
         </TableRow>
             
@@ -47,6 +48,7 @@
 	        <EditText android:textSize="15.0sp" android:textColor="#ff373737"
 	            android:id="@+id/user_pwd_content" android:layout_width="260dip"
 	            android:layout_height="wrap_content"
+	            android:layout_marginLeft="5.0dip"
 	        />
         </TableRow>
         </TableLayout> 
