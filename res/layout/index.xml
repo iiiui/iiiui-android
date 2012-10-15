@@ -4,5 +4,6 @@
 	android:orientation="vertical">
 	<TextView android:layout_width="fill_parent" android:layout_height="fill_parent"
 	 android:text="IIIUI LOGO" android:textSize="22.0sp" android:layout_gravity="center"
-	/> 
+	/>
 </LinearLayout>
+

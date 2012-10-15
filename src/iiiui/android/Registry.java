@@ -19,8 +19,12 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.http.client.CommonsClientHttpRequestFactory;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.http.converter.json.GsonHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import android.app.Activity;
@@ -71,25 +75,42 @@ public class Registry extends Activity {
 		br.setClickable(true);
 		br.setOnClickListener(new OnClickListener(){
 	        public void onClick(View v) {
+	        	/**
+	        	 * example for restful webservice
+	        	 * */
+//	        	RestTemplate restTemplate = new RestTemplate();
+//	        	restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+//	        	String url = "https://ajax.googleapis.com/ajax/services/search/web?v=1.0&q={query}";
+//	        	String result = restTemplate.getForObject(url, String.class, "SpringSource");
+	        	
 	        	RestTemplate restTemplate = new RestTemplate();
-	    		restTemplate.getMessageConverters().add(new MappingJacksonHttpMessageConverter());
+	        	
+//	        	restTemplate.setRequestFactory(new CommonsClientHttpRequestFactory());
+//	        	List<HttpMessageConverter<?>> mc = restTemplate.getMessageConverters();
+//	        	mc.add(new MappingJacksonHttpMessageConverter());
+	        	
+	        	restTemplate.getMessageConverters().add(new MappingJacksonHttpMessageConverter());
+//	    		restTemplate.getMessageConverters().add(new MappingJacksonHttpMessageConverter());
 	    		String username = ((TextView)findViewById(R.id.reg_username_content)).getText().toString();
 	    		String email = ((TextView)findViewById(R.id.reg_emailmobile_content)).getText().toString();
-	    		String password = ((TextView)findViewById(R.id.reg_pwd_content)).getText().toString();
+//	    		String password = ((TextView)findViewById(R.id.reg_pwd_content)).getText().toString();
 	    		
 	    		Map user = new HashMap();
 	    		user.put("email", "gvissul@gmail.com");
 				user.put("password", "woaixuexi");
 	    		JSONObject result;
 	    	    try{
-	    	    	restTemplate.postForObject("http://192.168.1.113:3000/api/users/sign_in", user, Object.class);
-	    	    	Toast.makeText(Registry.this, "µÇÂ¼suc",Toast.LENGTH_LONG).show();
+	    	    	String url = "http://192.168.1.16:3000/api/users/sign_in";
+	    	    	restTemplate.postForObject(url, user, JSONObject.class);
+	    	    	
+	    	    	Toast.makeText(Registry.this, "µÇÂ¼success"+"-tt",Toast.LENGTH_LONG).show();
+	    	    }catch(RestClientException re){
+	    	    	Toast.makeText(Registry.this, re.getMessage(),Toast.LENGTH_LONG).show();
 	    	    }catch(Exception e){
-	    	    	Toast.makeText(Registry.this, "Çë¼ì²éÍøÂçÁ¬½Ó"+username+"-"+email+"-"+password,Toast.LENGTH_LONG).show();
+	    	    	Toast.makeText(Registry.this, "Ô­Òò:"+e.getMessage(),Toast.LENGTH_LONG).show();
 	    	    }
 	    	    
 //	    	    System.out.println("regist-->"+result);
-	        	
 	        	Intent myIntent = new Intent(Registry.this,Index.class);
 	            startActivity(myIntent);
 	            Registry.this.finish();
