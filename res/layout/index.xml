@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<LinearLayout android:background="#ffffff" android:layout_width="fill_parent" 
-	android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android" 
+<LinearLayout android:background="#5f8cbe" android:layout_width="fill_parent" 
+	android:layout_height="50dip" xmlns:android="http://schemas.android.com/apk/res/android" 
 	android:orientation="vertical">
 	<TextView android:layout_width="fill_parent" android:layout_height="fill_parent"
-	 android:text="个人主页"
-	/>
+	 android:text="IIIUI LOGO" android:textSize="22.0sp" android:layout_gravity="center"
+	/> 
 </LinearLayout>

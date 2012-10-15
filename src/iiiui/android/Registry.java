@@ -1,10 +1,26 @@
 package iiiui.android;
 
+import iiiui.android.model.User;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 import android.app.Activity;
@@ -25,6 +41,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Registry extends Activity {
@@ -40,11 +57,6 @@ public class Registry extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		RestTemplate restTemplate = new RestTemplate();
-//		restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
-//	    String result = restTemplate.getForObject("http://127.0.0.1:3000/api/users/sign_up", String.class);
-//	    System.out.println("regist-->"+result);
-		
 		this.setContentView(R.layout.registry);
 		View bl = findViewById(R.id.registry_top_btn_left);
 		bl.setClickable(true);
@@ -59,6 +71,25 @@ public class Registry extends Activity {
 		br.setClickable(true);
 		br.setOnClickListener(new OnClickListener(){
 	        public void onClick(View v) {
+	        	RestTemplate restTemplate = new RestTemplate();
+	    		restTemplate.getMessageConverters().add(new MappingJacksonHttpMessageConverter());
+	    		String username = ((TextView)findViewById(R.id.reg_username_content)).getText().toString();
+	    		String email = ((TextView)findViewById(R.id.reg_emailmobile_content)).getText().toString();
+	    		String password = ((TextView)findViewById(R.id.reg_pwd_content)).getText().toString();
+	    		
+	    		Map user = new HashMap();
+	    		user.put("email", "gvissul@gmail.com");
+				user.put("password", "woaixuexi");
+	    		JSONObject result;
+	    	    try{
+	    	    	restTemplate.postForObject("http://192.168.1.113:3000/api/users/sign_in", user, Object.class);
+	    	    	Toast.makeText(Registry.this, "登录suc",Toast.LENGTH_LONG).show();
+	    	    }catch(Exception e){
+	    	    	Toast.makeText(Registry.this, "请检查网络连接"+username+"-"+email+"-"+password,Toast.LENGTH_LONG).show();
+	    	    }
+	    	    
+//	    	    System.out.println("regist-->"+result);
+	        	
 	        	Intent myIntent = new Intent(Registry.this,Index.class);
 	            startActivity(myIntent);
 	            Registry.this.finish();
@@ -76,6 +107,28 @@ public class Registry extends Activity {
 	        }
 	    });
 
+	}
+	
+	/**
+	 *Post请求
+	 */
+	public void doPost(String url , List nameValuePairs){
+		//新建HttpClient对象  
+		HttpClient httpclient = new DefaultHttpClient();
+		//创建POST连接
+		HttpPost httppost = new HttpPost(url);
+		try {
+//			//使用PSOT方式，必须用NameValuePair数组传递参数
+//			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+//			nameValuePairs.add(new BasicNameValuePair("id", "12345"));
+//			nameValuePairs.add(new BasicNameValuePair("stringdata","hps is Cool!"));
+			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+			HttpResponse response = httpclient.execute(httppost);
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	//打开gallery界面，选择图片
@@ -144,8 +197,7 @@ public class Registry extends Activity {
 				 final Intent intent = getTakePickIntent(mCurrentPhotoFile);  
 				 startActivityForResult(intent, CAMERA_WITH_DATA);         
 			 } catch (ActivityNotFoundException e) {    
-				 Toast.makeText(this, "没找到图片activity2",         
-				 Toast.LENGTH_LONG).show();      
+				 Toast.makeText(this, "没找到图片activity2",Toast.LENGTH_LONG).show();      
 			 }   
 	 }
 	
