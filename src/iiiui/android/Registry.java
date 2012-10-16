@@ -1,11 +1,13 @@
 package iiiui.android;
 
 import iiiui.android.model.User;
+import iiiui.android.model.UserEntity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +21,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.http.MediaType;
 import org.springframework.http.client.CommonsClientHttpRequestFactory;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -85,25 +88,27 @@ public class Registry extends Activity {
 	        	
 	        	RestTemplate restTemplate = new RestTemplate();
 	        	
-//	        	restTemplate.setRequestFactory(new CommonsClientHttpRequestFactory());
-//	        	List<HttpMessageConverter<?>> mc = restTemplate.getMessageConverters();
-//	        	mc.add(new MappingJacksonHttpMessageConverter());
-	        	
-	        	restTemplate.getMessageConverters().add(new MappingJacksonHttpMessageConverter());
-//	    		restTemplate.getMessageConverters().add(new MappingJacksonHttpMessageConverter());
-	    		String username = ((TextView)findViewById(R.id.reg_username_content)).getText().toString();
+//	        	List list = new ArrayList();
+//	        	MediaType mt = new MediaType("text/html;charset=UTF-8");
+//	        	list.add(mt);
+//	        	MappingJacksonHttpMessageConverter hmc = new MappingJacksonHttpMessageConverter();
+//	        	hmc.setSupportedMediaTypes(list);
+	        	StringHttpMessageConverter hmc = new StringHttpMessageConverter();
+	        	restTemplate.getMessageConverters().add(hmc);
+	    		
+	        	String username = ((TextView)findViewById(R.id.reg_username_content)).getText().toString();
 	    		String email = ((TextView)findViewById(R.id.reg_emailmobile_content)).getText().toString();
-//	    		String password = ((TextView)findViewById(R.id.reg_pwd_content)).getText().toString();
+	    		String password = ((TextView)findViewById(R.id.reg_pwd_content)).getText().toString();
 	    		
 	    		Map user = new HashMap();
-	    		user.put("email", "gvissul@gmail.com");
-				user.put("password", "woaixuexi");
+	    		user.put("email", email);
+				user.put("password", password);
 	    		JSONObject result;
 	    	    try{
-	    	    	String url = "http://192.168.1.16:3000/api/users/sign_in";
-	    	    	restTemplate.postForObject(url, user, JSONObject.class);
+	    	    	String url = "http://192.168.1.6:3000/api/users/sign_up";
+	    	    	String rs = restTemplate.postForObject(url, "", String.class);
 	    	    	
-	    	    	Toast.makeText(Registry.this, "µÇÂ¼success"+"-tt",Toast.LENGTH_LONG).show();
+	    	    	Toast.makeText(Registry.this, "µÇÂ¼success->"+rs,Toast.LENGTH_LONG).show();
 	    	    }catch(RestClientException re){
 	    	    	Toast.makeText(Registry.this, re.getMessage(),Toast.LENGTH_LONG).show();
 	    	    }catch(Exception e){

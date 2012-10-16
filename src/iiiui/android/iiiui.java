@@ -1,8 +1,18 @@
 package iiiui.android;
 
+import iiiui.android.model.User;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -32,13 +42,39 @@ public class iiiui extends Activity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.main);
-//        Button button = (Button)findViewById(R.id.button);
-//        button.setOnClickListener(new OnClickListener(){
-//            public void onClick(View v) {
+        
+        Button button = (Button)findViewById(R.id.button);
+        button.setOnClickListener(new OnClickListener(){
+            public void onClick(View v) {
 //            		letCamera();
-//            	}
-//            }
-//        );
+            	RestTemplate restTemplate = new RestTemplate();
+//	        	List list = new ArrayList();
+//	        	MediaType mt = new MediaType("text/html;charset=UTF-8");
+//	        	list.add(mt);
+	        	MappingJacksonHttpMessageConverter hmc = new MappingJacksonHttpMessageConverter();
+//	        	hmc.setSupportedMediaTypes(list);
+	        	restTemplate.getMessageConverters().add(hmc);
+            	
+	        	String username = ((TextView)findViewById(R.id.account_content)).getText().toString();
+	    		String password = ((TextView)findViewById(R.id.user_pwd_content)).getText().toString();
+	    		
+	    		Map user = new HashMap();
+	    		user.put("email", username);
+				user.put("password", password);
+            	
+				String url = "http://192.168.1.6:3000/api/users/sign_in";
+    	    	try{
+    	    		restTemplate.postForObject(url, user, User.class);
+    	    	}catch(Exception e){
+    	    		Toast.makeText(iiiui.this, e.getMessage(),Toast.LENGTH_LONG).show();
+    	    	}
+    	    	Intent myIntent = new Intent(iiiui.this,Index.class);
+	            startActivity(myIntent);
+	            iiiui.this.finish();
+            	}
+            }
+        );
+        
         Button buttonleft = (Button)findViewById(R.id.buttonleft);
         buttonleft.setOnClickListener(new OnClickListener(){
             public void onClick(View v) {

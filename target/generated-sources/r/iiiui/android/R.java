@@ -25,27 +25,28 @@ public final class R {
     public static final class id {
         public static final int account=0x7f050002;
         public static final int account_content=0x7f050003;
-        public static final int buttonleft=0x7f050006;
-        public static final int buttonright=0x7f050007;
-        public static final int getuserphoto=0x7f050011;
+        public static final int button=0x7f050006;
+        public static final int buttonleft=0x7f050007;
+        public static final int buttonright=0x7f050008;
+        public static final int getuserphoto=0x7f050012;
         public static final int logo=0x7f050000;
-        public static final int reg_divider=0x7f05000c;
-        public static final int reg_emailmobile=0x7f05000d;
-        public static final int reg_emailmobile_content=0x7f05000e;
-        public static final int reg_pwd=0x7f05000f;
-        public static final int reg_pwd_content=0x7f050010;
-        public static final int reg_username=0x7f05000a;
-        public static final int reg_username_content=0x7f05000b;
-        public static final int registry=0x7f050009;
-        public static final int registry_head=0x7f050008;
-        public static final int registry_top_btn_left=0x7f050013;
-        public static final int registry_top_btn_right=0x7f050014;
-        public static final int registry_top_title=0x7f050015;
+        public static final int reg_divider=0x7f05000d;
+        public static final int reg_emailmobile=0x7f05000e;
+        public static final int reg_emailmobile_content=0x7f05000f;
+        public static final int reg_pwd=0x7f050010;
+        public static final int reg_pwd_content=0x7f050011;
+        public static final int reg_username=0x7f05000b;
+        public static final int reg_username_content=0x7f05000c;
+        public static final int registry=0x7f05000a;
+        public static final int registry_head=0x7f050009;
+        public static final int registry_top_btn_left=0x7f050014;
+        public static final int registry_top_btn_right=0x7f050015;
+        public static final int registry_top_title=0x7f050016;
         public static final int signin=0x7f050001;
-        public static final int surface_camera=0x7f050016;
+        public static final int surface_camera=0x7f050017;
         public static final int user_pwd=0x7f050004;
         public static final int user_pwd_content=0x7f050005;
-        public static final int userphoto=0x7f050012;
+        public static final int userphoto=0x7f050013;
     }
     public static final class layout {
         public static final int bg_panel_above_left=0x7f030000;
