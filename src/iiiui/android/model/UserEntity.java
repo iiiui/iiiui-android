@@ -1,9 +1,11 @@
 package iiiui.android.model;
 
+import org.json.JSONObject;
+
 public class UserEntity {
 
 	private boolean success;
-	private String errors;
+	private UserErrors errors;
 	private User user;
 	
 	public boolean isSuccess() {
@@ -19,10 +21,10 @@ public class UserEntity {
 		this.user = user;
 	}
 	
-	public String getErrors() {
+	public UserErrors getErrors() {
 		return errors;
 	}
-	public void setErrors(String errors) {
+	public void setErrors(UserErrors errors) {
 		this.errors = errors;
 	}
 	

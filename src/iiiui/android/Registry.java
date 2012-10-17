@@ -19,14 +19,18 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.CommonsClientHttpRequestFactory;
+import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.GsonHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
@@ -91,22 +95,26 @@ public class Registry extends Activity {
 //	        	List list = new ArrayList();
 //	        	MediaType mt = new MediaType("text/html;charset=UTF-8");
 //	        	list.add(mt);
-//	        	MappingJacksonHttpMessageConverter hmc = new MappingJacksonHttpMessageConverter();
+	        	MappingJacksonHttpMessageConverter hmc = new MappingJacksonHttpMessageConverter();
 //	        	hmc.setSupportedMediaTypes(list);
-	        	StringHttpMessageConverter hmc = new StringHttpMessageConverter();
+//	        	StringHttpMessageConverter hmc = new StringHttpMessageConverter();
 	        	restTemplate.getMessageConverters().add(hmc);
 	    		
 	        	String username = ((TextView)findViewById(R.id.reg_username_content)).getText().toString();
 	    		String email = ((TextView)findViewById(R.id.reg_emailmobile_content)).getText().toString();
 	    		String password = ((TextView)findViewById(R.id.reg_pwd_content)).getText().toString();
 	    		
-	    		Map user = new HashMap();
-	    		user.put("email", email);
-				user.put("password", password);
-	    		JSONObject result;
 	    	    try{
+//	    	    	JSONArray user = new JSONArray();
+	    	    	Map user = new HashMap();
+	    	    	user.put("email", username);
+	    	    	user.put("password", password);
+	    	    	
+//	    	    	user.put("user[email]", email);
+//	    	    	user.put("user[password]", password);
+	    	    	
 	    	    	String url = "http://192.168.1.6:3000/api/users/sign_up";
-	    	    	String rs = restTemplate.postForObject(url, "", String.class);
+	    	    	UserEntity rs = restTemplate.postForObject(url, user, UserEntity.class);
 	    	    	
 	    	    	Toast.makeText(Registry.this, "µÇÂ¼success->"+rs,Toast.LENGTH_LONG).show();
 	    	    }catch(RestClientException re){
@@ -283,15 +291,6 @@ public class Registry extends Activity {
 	    canvas.drawBitmap(bitmap, rect, rect, paint);  
 	  
 	    return output;  
-	}  
-	
-//	public void onClick(View v) {
-//		if(R.id.buttonleft == v.getId())
-//		{
-//			Intent i = new Intent(this,Registry.class);
-//			this.startActivity(i);
-//		}
-//	}
-	
+	}
 	
 }

@@ -13,6 +13,7 @@
         </activity>
         
         <activity android:name=".Registry" android:label="registry"></activity>
+        <activity android:name=".FindPwd" android:label="findpwd"></activity>
         <activity android:name=".Index" android:label="index"></activity>
 
     </application>

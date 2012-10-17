@@ -84,6 +84,15 @@ public class iiiui extends Activity {
             }
         });
         
+        Button buttonright = (Button)findViewById(R.id.buttonright);
+        buttonright.setOnClickListener(new OnClickListener(){
+            public void onClick(View v) {
+                Intent findpwd = new Intent();
+                findpwd.setComponent(new ComponentName(iiiui.this,FindPwd.class));
+                startActivityForResult(findpwd, 1);
+            }
+        });
+        
     }
     
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
