@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	    <group>
+	    <item android:title="首页" android:id="@+id/menu_index" android:icon="@drawable/icon"/><!-- android:icon="@drawable/icon" 可以使用漂亮的图片 -->
+		<item android:title="搜索" android:id="@+id/menu_search" android:icon="@drawable/icon"/>
+		<item android:title="分享" android:id="@+id/menu_share" android:icon="@drawable/icon">
+			<menu>
+				<group>
+					<item android:title="Copy" android:id="@+id/edit_copy"/>
+					<item android:title="Paste" android:id="@+id/edit_paste"/>
+					<item android:title="Cut" android:id="@+id/edit_cut"/>
+					<item android:title="Delete" android:id="@+id/edit_delete"/>
+				</group>
+			</menu>
+		</item>
+		<item android:title="消息" android:id="@+id/menu_news" android:icon="@drawable/icon">
+			<menu>
+				<item android:title="Open..." android:id="@+id/file_open"/>
+				<item android:title="Save" android:id="@+id/file_save"/>
+				<item android:title="Save as" android:id="@+id/file_saveas"/>
+				<item android:title="Exit" android:id="@+id/file_exit"/>
+			</menu>
+		</item>
+		<item android:title="主页" android:id="@+id/menu_local" android:icon="@drawable/icon">
+			<menu>
+				<item android:title="Open..." android:id="@+id/file_open"/>
+				<item android:title="Save" android:id="@+id/file_save"/>
+				<item android:title="Save as" android:id="@+id/file_saveas"/>
+				<item android:title="Exit" android:id="@+id/file_exit"/>
+			</menu>
+		</item>
+		</group>
+	</menu>
