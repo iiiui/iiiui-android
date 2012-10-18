@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.json.JSONObject;
 import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
@@ -36,48 +37,41 @@ public class FindPwd extends Activity {
 		br.setClickable(true);
 		br.setOnClickListener(new OnClickListener(){
 	        public void onClick(View v) {
-	        	/**
-	        	 * example for restful webservice
-	        	 * */
-//	        	RestTemplate restTemplate = new RestTemplate();
-//	        	restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
-//	        	String url = "https://ajax.googleapis.com/ajax/services/search/web?v=1.0&q={query}";
-//	        	String result = restTemplate.getForObject(url, String.class, "SpringSource");
-	        	
 	        	RestTemplate restTemplate = new RestTemplate();
-	        	
-//	        	List list = new ArrayList();
-//	        	MediaType mt = new MediaType("text/html;charset=UTF-8");
-//	        	list.add(mt);
-//	        	MappingJacksonHttpMessageConverter hmc = new MappingJacksonHttpMessageConverter();
-//	        	hmc.setSupportedMediaTypes(list);
-	        	StringHttpMessageConverter hmc = new StringHttpMessageConverter();
+	        	MappingJacksonHttpMessageConverter hmc = new MappingJacksonHttpMessageConverter();
 	        	restTemplate.getMessageConverters().add(hmc);
-	    		
+	        	
 	        	String username = ((TextView)findViewById(R.id.findpwd_username_content)).getText().toString();
 	    		String email = ((TextView)findViewById(R.id.findpwd_emailmobile_content)).getText().toString();
 	    		
-	    		Map user = new HashMap();
-	    		user.put("username", username);
-	    		user.put("email", email);
-	    		JSONObject result;
-	    	    try{
+	    		Map param = new HashMap();
+	    		param.put("username", username);
+	    		param.put("email", email);
+	    		Map dataObj = new HashMap();
+	    		dataObj.put("user", param);
+	    	    
+	    		try{
 	    	    	String url = "http://192.168.1.6:3000/api/users/find_password";
-	    	    	String rs = restTemplate.postForObject(url, "", String.class);
-	    	    	
-	    	    	Toast.makeText(FindPwd.this, "提交success->"+rs,Toast.LENGTH_LONG).show();
+	    	    	Map result = restTemplate.postForObject(url, dataObj, Map.class);
+	    	    	if(result.containsKey("success")){
+	    	    		String submitStatus = result.get("success").toString();
+	    	    		if("true".equals(submitStatus)){
+	    	    			Toast.makeText(FindPwd.this, "申请提交成功！",Toast.LENGTH_LONG).show();
+	    	    		}else{
+	    	    			Toast.makeText(FindPwd.this, "申请提交失败！",Toast.LENGTH_LONG).show();
+	    	    		}
+	    	    	}else{
+	    	    		Toast.makeText(FindPwd.this, "申请提交失败！",Toast.LENGTH_LONG).show();
+	    	    	}
 	    	    }catch(RestClientException re){
 	    	    	Toast.makeText(FindPwd.this, re.getMessage(),Toast.LENGTH_LONG).show();
 	    	    }catch(Exception e){
-	    	    	Toast.makeText(FindPwd.this, "原因:"+e.getMessage(),Toast.LENGTH_LONG).show();
+	    	    	Toast.makeText(FindPwd.this, e.getMessage(),Toast.LENGTH_LONG).show();
 	    	    }
-	    	    
 	        	Intent myIntent = new Intent(FindPwd.this,iiiui.class);
 	            startActivity(myIntent);
 	            FindPwd.this.finish();
 	        }
 	    });
-
 	}
-	
 }

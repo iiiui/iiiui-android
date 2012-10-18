@@ -1,8 +1,5 @@
 package iiiui.android;
 
-import iiiui.android.model.User;
-import iiiui.android.model.UserEntity;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -91,13 +89,7 @@ public class Registry extends Activity {
 //	        	String result = restTemplate.getForObject(url, String.class, "SpringSource");
 	        	
 	        	RestTemplate restTemplate = new RestTemplate();
-	        	
-//	        	List list = new ArrayList();
-//	        	MediaType mt = new MediaType("text/html;charset=UTF-8");
-//	        	list.add(mt);
 	        	MappingJacksonHttpMessageConverter hmc = new MappingJacksonHttpMessageConverter();
-//	        	hmc.setSupportedMediaTypes(list);
-//	        	StringHttpMessageConverter hmc = new StringHttpMessageConverter();
 	        	restTemplate.getMessageConverters().add(hmc);
 	    		
 	        	String username = ((TextView)findViewById(R.id.reg_username_content)).getText().toString();
@@ -105,25 +97,38 @@ public class Registry extends Activity {
 	    		String password = ((TextView)findViewById(R.id.reg_pwd_content)).getText().toString();
 	    		
 	    	    try{
-//	    	    	JSONArray user = new JSONArray();
-	    	    	Map user = new HashMap();
-	    	    	user.put("email", username);
-	    	    	user.put("password", password);
-	    	    	
-//	    	    	user.put("user[email]", email);
-//	    	    	user.put("user[password]", password);
+	    	    	Map param = new HashMap();
+	    	    	param.put("email", email);
+	    	    	param.put("password", password);
+	    	    	Map dataObj = new HashMap();
+	    	    	dataObj.put("user", param);
 	    	    	
 	    	    	String url = "http://192.168.1.6:3000/api/users/sign_up";
-	    	    	UserEntity rs = restTemplate.postForObject(url, user, UserEntity.class);
+	    	    	Map result = restTemplate.postForObject(url, dataObj, Map.class);
 	    	    	
-	    	    	Toast.makeText(Registry.this, "登录success->"+rs,Toast.LENGTH_LONG).show();
+	    	    	if(result.containsKey("success")){
+	    	    		String regStatus = result.get("success").toString();
+		    	    	if("true".equals(regStatus)){
+		    	    		Toast.makeText(Registry.this, "注册成功！",Toast.LENGTH_LONG).show();
+			    	    	Map user = (Map)result.get("user");
+			    	    	if(null != user){
+			    	    		Toast.makeText(Registry.this, "用户信息->"+user.get("id")+"-"+user.get("email")+"-"+user.get("created_at"),Toast.LENGTH_LONG).show();
+			    	    	}
+		    	    	}else{
+		    	    		if(result.containsKey("errors")){
+    	    					String errors = result.get("errors").toString();
+    	    					Toast.makeText(Registry.this, "注册失败！"+errors,Toast.LENGTH_LONG).show();
+    	    				}
+		    	    		Toast.makeText(Registry.this, "注册失败！",Toast.LENGTH_LONG).show();
+		    	    	}
+	    	    	}else{
+	    	    		Toast.makeText(Registry.this, "注册遇到问题，请稍后再试！",Toast.LENGTH_LONG).show();
+	    	    	}
 	    	    }catch(RestClientException re){
 	    	    	Toast.makeText(Registry.this, re.getMessage(),Toast.LENGTH_LONG).show();
 	    	    }catch(Exception e){
-	    	    	Toast.makeText(Registry.this, "原因:"+e.getMessage(),Toast.LENGTH_LONG).show();
+	    	    	Toast.makeText(Registry.this, e.getMessage(),Toast.LENGTH_LONG).show();
 	    	    }
-	    	    
-//	    	    System.out.println("regist-->"+result);
 	        	Intent myIntent = new Intent(Registry.this,Index.class);
 	            startActivity(myIntent);
 	            Registry.this.finish();
@@ -140,8 +145,27 @@ public class Registry extends Activity {
 	        	doPickPhotoFromGallery();
 	        }
 	    });
-
 	}
+	
+	public static String mapToJson(Map<String,String> map){
+	    if(map==null||map.size()<1){
+	        return null;
+	    }
+	    StringBuffer buffer=new StringBuffer();
+	    buffer.append("{");
+	    for (Iterator<String> iterator = map.keySet().iterator(); iterator.hasNext();) {
+	        String key = (String) iterator.next();
+	        buffer.append("'"+key+"'");
+	        buffer.append(":");
+	        buffer.append("'"+map.get(key)+"'");
+	        if(iterator.hasNext()){
+	            buffer.append(",");
+	        }
+	    }
+	    buffer.append("}");
+	    return buffer.toString();
+	}
+
 	
 	/**
 	 *Post请求

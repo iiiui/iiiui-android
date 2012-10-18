@@ -7,7 +7,14 @@ public class UserEntity {
 	private boolean success;
 	private UserErrors errors;
 	private User user;
+	private Object token;
 	
+	public Object getToken() {
+		return token;
+	}
+	public void setToken(Object token) {
+		this.token = token;
+	}
 	public boolean isSuccess() {
 		return success;
 	}

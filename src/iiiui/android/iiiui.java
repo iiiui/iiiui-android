@@ -1,7 +1,5 @@
 package iiiui.android;
 
-import iiiui.android.model.User;
-
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -48,23 +46,39 @@ public class iiiui extends Activity {
             public void onClick(View v) {
 //            		letCamera();
             	RestTemplate restTemplate = new RestTemplate();
-//	        	List list = new ArrayList();
-//	        	MediaType mt = new MediaType("text/html;charset=UTF-8");
-//	        	list.add(mt);
 	        	MappingJacksonHttpMessageConverter hmc = new MappingJacksonHttpMessageConverter();
-//	        	hmc.setSupportedMediaTypes(list);
 	        	restTemplate.getMessageConverters().add(hmc);
             	
-	        	String username = ((TextView)findViewById(R.id.account_content)).getText().toString();
+	        	String account = ((TextView)findViewById(R.id.account_content)).getText().toString();
 	    		String password = ((TextView)findViewById(R.id.user_pwd_content)).getText().toString();
 	    		
-	    		Map user = new HashMap();
-	    		user.put("email", username);
-				user.put("password", password);
+	    		Map param = new HashMap();
+	    		param.put("email", account);
+	    		param.put("password", password);
+				Map dataObj = new HashMap();
+				dataObj.put("user", param);
             	
-				String url = "http://192.168.1.6:3000/api/users/sign_in";
     	    	try{
-    	    		restTemplate.postForObject(url, user, User.class);
+    	    		String url = "http://192.168.1.6:3000/api/users/sign_in";
+    	    		Map result = restTemplate.postForObject(url, dataObj, Map.class);
+    	    		if(result.containsKey("success")){
+    	    			String loginStatus = result.get("success").toString();
+    	    			if("true".equals(loginStatus)){
+    	    				Toast.makeText(iiiui.this, "µÇÂ¼³É¹¦£¡",Toast.LENGTH_LONG).show();
+			    	    	Map user = (Map)result.get("user");
+			    	    	if(null != user){
+			    	    		Toast.makeText(iiiui.this, "ÓÃ»§ÐÅÏ¢->"+user.get("id")+"-"+user.get("email")+"-"+user.get("created_at"),Toast.LENGTH_LONG).show();
+			    	    	}
+    	    			}else{
+    	    				if(result.containsKey("errors")){
+    	    					String errors = result.get("errors").toString();
+    	    					Toast.makeText(iiiui.this, "µÇÂ¼Ê§°Ü£¡"+errors,Toast.LENGTH_LONG).show();
+    	    				}
+    	    				Toast.makeText(iiiui.this, "µÇÂ¼Ê§°Ü£¡",Toast.LENGTH_LONG).show();
+    	    			}
+    	    		}else{
+    	    			Toast.makeText(iiiui.this, "µÇÂ¼Ê§°Ü£¡",Toast.LENGTH_LONG).show();
+    	    		}
     	    	}catch(Exception e){
     	    		Toast.makeText(iiiui.this, e.getMessage(),Toast.LENGTH_LONG).show();
     	    	}
