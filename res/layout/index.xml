@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <FrameLayout android:layout_width="fill_parent" 
 	android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android" 
-	android:orientation="vertical">
+	android:orientation="vertical" android:background="#ffffff">
 	
 	<TextView android:layout_width="fill_parent" android:layout_height="50dip" 
 	  android:background="#5f8cbe" android:text="IIIUI LOGO" android:textSize="22.0sp"
